@@ -7,6 +7,7 @@
     <title>Plantamática</title>
 </head>
 <body>
+    <a href="{{ route('user.index') }}">Página de usuários (TESTE)</a>
     <header>
         <i>
         </i>
