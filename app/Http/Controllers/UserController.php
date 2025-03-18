@@ -22,6 +22,10 @@ class UserController extends Controller
         return view("user.users", ["user" => $user]);
     }
 
+    public function show_user(User $user) {
+        return view("user.show" , ['user' => $user]);
+    }
+
     public function store(UserRequest $request) {
         $request->validated();
 

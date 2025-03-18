@@ -13,6 +13,6 @@
     @endif
 
     <a href="{{ route('user.create')}}">Página de cadastro</a>
-    <a href="{{ route('user.show')}}">Lista de usuários</a>
+    <a href="{{ route('user.users')}}">Lista de usuários</a>
 </body>
 </html>

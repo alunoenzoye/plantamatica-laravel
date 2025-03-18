@@ -19,6 +19,8 @@
        ID: {{ $dbuser->id}}<br>
        Nome: {{ $dbuser->name}}<br>
        Email: {{ $dbuser->email}}<br>
+       <a href="{{ route('user.show', ['user' => $dbuser->id]) }}">Visualizar usuário</a>
+
        <hr>
     @empty
         
