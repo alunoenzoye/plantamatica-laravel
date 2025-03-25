@@ -55,4 +55,10 @@ class UserController extends Controller
 
         return redirect()->route('user.show', ['user' => $user]);
     }
+
+    public function destroy(User $user) {
+        $user->delete();
+
+        return redirect()->route('user.users')->with("success", "Usuário apagado com sucesso.");
+    }
 }

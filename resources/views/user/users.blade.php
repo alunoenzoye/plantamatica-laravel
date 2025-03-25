@@ -22,6 +22,11 @@
        <a href="{{ route('user.show', ['user' => $dbuser->id]) }}">Visualizar usuário</a>
        <a href="{{ route('user.edit', ['user' => $dbuser->id]) }}">Editar usuário</a>
 
+       <form action="{{ route('user.destroy', ['user' => $dbuser->id]) }}" method="post">
+            @csrf
+            @method('delete')
+            <button type="submit" onclick="return confirm('Você tem certeza que quer apagar o usuário {{ $dbuser->name }}?');">Apagar</button>
+       </form>
        <hr>
     @empty
         
