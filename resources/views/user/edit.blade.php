@@ -20,9 +20,9 @@
 
     @endif
 
-    <form action="{{ route('user.store')}}" method="POST">
+    <form action="{{ route('user.update', ['user' => $user->id]) }}" method="POST">
         @csrf
-        @method('POST')
+        @method('PUT')
 
         <label>Nome: </label>
         <input type="text" name="name" placeholder="Nome do usuário" value="{{ old('name') }}">
@@ -33,7 +33,7 @@
         <label>Senha: </label>
         <input type="password" name="password" placeholder="Senha">
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit">Atualizar</button>
     </form>
 </body>
 

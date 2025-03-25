@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+
+    <a href="{{ route('user.users') }}">Voltar</a>
+
     <p>ID: {{ $user->id }}</p>
     <p>Nome: {{ $user->name }}</p>
     <p>E-mail: {{ $user->email }}</p>

@@ -20,6 +20,7 @@
        Nome: {{ $dbuser->name}}<br>
        Email: {{ $dbuser->email}}<br>
        <a href="{{ route('user.show', ['user' => $dbuser->id]) }}">Visualizar usuário</a>
+       <a href="{{ route('user.edit', ['user' => $dbuser->id]) }}">Editar usuário</a>
 
        <hr>
     @empty
