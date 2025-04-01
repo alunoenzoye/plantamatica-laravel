@@ -5,21 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index() {
-        return view("user.index");
+        $users = User::orderBy('id')->paginate(6);
+
+        // dd(Auth::check());
+
+        return view("user.index", ['users' => $users]);
     }
     
     public function create() {
         return view("user.create");
-    }
-    
-    public function show() {
-        $user = User::orderByDesc('id')->get();
-
-        return view("user.users", ["user" => $user]);
     }
 
     public function show_user(User $user) {
@@ -59,6 +58,6 @@ class UserController extends Controller
     public function destroy(User $user) {
         $user->delete();
 
-        return redirect()->route('user.users')->with("success", "Usuário apagado com sucesso.");
+        return redirect()->route('user.index')->with("success", "Usuário apagado com sucesso.");
     }
 }

@@ -1,11 +1,51 @@
 @extends('layout.admin')
 
 @section('content')
-    <a href="{{ route('user.users') }}">Voltar</a>
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="{{ route('home.index') }}">Painel</a>
+        <a class="breadcrumb-item" href="{{ route('user.index') }}">Usuários</a>
+        <span class="breadcrumb-item active" aria-current="page">Visualizar</span>
+    </nav>
 
-    <p>ID: {{ $user->id }}</p>
-    <p>Nome: {{ $user->name }}</p>
-    <p>E-mail: {{ $user->email }}</p>
-    <p>Data de criação: {{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}</p>
-    <p>Data de atualização: {{ \Carbon\Carbon::parse($user->update_at)->format('d/m/Y H:i:s') }}</p>
+    <div class="card mt-4 mb-4 border-light shadow">
+
+        <div class="card-header hstack gap-2">
+            <span>Visualizar Usuário</span>
+
+            <span class="ms-auto d-sm-flex flex-row">
+
+                <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm me-1">Editar</a>
+                <form method="POST" action="{{ route('user.destroy', ['user' => $user->id]) }}">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger btn-sm me-1"
+                        onclick="return confirm('Tem certeza que deseja apagar este registro?')">Apagar</button>
+                </form>
+            </span>
+        </div>
+
+        <div class="card-body">
+
+            <x-alert />
+
+            <dl class="row">
+
+                <dt class="col-sm-3">ID</dt>
+                <dd class="col-sm-9">{{ $user->id }}</dd>
+
+                <dt class="col-sm-3">Nome</dt>
+                <dd class="col-sm-9">{{ $user->name }}</dd>
+
+                <dt class="col-sm-3">E-mail</dt>
+                <dd class="col-sm-9">{{ $user->email }}</dd>
+
+                <dt class="col-sm-3">Cadastrado</dt>
+                <dd class="col-sm-9">{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}</dd>
+
+                <dt class="col-sm-3">Editado</dt>
+                <dd class="col-sm-9">{{ \Carbon\Carbon::parse($user->updated_at)->format('d/m/Y H:i:s') }}</dd>
+
+            </dl>
+        </div>
+    </div>
 @endsection
