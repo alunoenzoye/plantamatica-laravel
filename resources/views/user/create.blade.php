@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.admin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar usuário</title>
-</head>
-
-<body>
+@section('content')
     <a href="{{ route('user.index')}}">Página de cadastro</a>
-
-    @if ($errors->any())
-
-    @foreach ($errors->all() as $error)
-        <p style="color: red">
-            {{ $error }}
-        </p>
-    @endforeach
-
-    @endif
 
     <form action="{{ route('user.store')}}" method="POST">
         @csrf
         @method('POST')
 
-        <label>Nome: </label>
-        <input type="text" name="name" placeholder="Nome do usuário" value="{{ old('name') }}">
+        <div class="mb-3">
+            <label class="form-label">Nome: </label>
+            <input class="form-control" type="text" name="name" placeholder="Nome do usuário" value="{{ old('name') }}">
+        </div>
 
-        <label>E-Mail: </label>
-        <input type="email" name="email" placeholder="E-Mail" value="{{ old('email') }}">
+        <div class="mb-3">
+            <label class="form-label">E-Mail: </label>
+            <input class="form-control" type="email" name="email" placeholder="E-Mail" value="{{ old('email') }}">
+        </div>
 
-        <label>Senha: </label>
-        <input type="password" name="password" placeholder="Senha">
+        <div class="mb-3">
+            <label class="form-label">Senha: </label>
+            <input class="form-control" type="password" name="password" placeholder="Senha">
+        </div>
 
-        <button type="submit">Cadastrar</button>
+        @if ($errors->any())
+
+        @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">
+                {{ $error }}
+            </p>
+        @endforeach
+
+        @endif
+
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
     </form>
-</body>
-
-</html>
+@endsection
