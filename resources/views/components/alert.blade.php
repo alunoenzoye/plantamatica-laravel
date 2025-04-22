@@ -2,7 +2,7 @@
     <div class="alert alert-success" role="alert">
         {{ session('success') }}
     </div>
-@endif
+@endif --}}
 
 @if ($errors->any())
     <div class="alert alert-danger" role="alert">
@@ -10,11 +10,11 @@
             {{ $error }}<br>
         @endforeach
     </div>
-@endif --}}
+@endif
 
 @if (session('success'))
     <script>
-        document.addEventListener('DOMContentLoad', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             Swal.fire({
                 title: "Pronto!",
                 text: " {{ session('success') }} ",

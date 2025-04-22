@@ -51,8 +51,8 @@
                 <div class="col-md-6">
                     <label for="password" class="form-label">Confirmar Senha</label>
                     <div class="input-group mb3">
-                        <input type="password" name="confirm_password" class="form-control" id="confirm_password"
-                            placeholder="Confirmar senha" value="{{ old('confirm_password') }}">
+                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
+                            placeholder="Confirmar senha" value="{{ old('password_confirmation') }}">
                     </div>
                 </div>
 
