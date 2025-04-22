@@ -31,16 +31,29 @@
                         value="{{ old('name') }}">
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="email" name="email" class="form-control" id="email"
-                        placeholder="Melhor e-mail do usuário" value="{{ old('email')}}">
+                        placeholder="E-mail do usuário" value="{{ old('email')}}">
                 </div>
 
                 <div class="col-md-6">
                     <label for="password" class="form-label">Senha</label>
-                    <input type="password" name="password" class="form-control" id="password"
-                        placeholder="Senha com no mínimo 6 caracteres" value="{{ old('password') }}">
+                    <div class="input-group mb3">
+                        <input type="password" name="password" class="form-control" id="password"
+                            placeholder="Senha com no mínimo 6 caracteres" value="{{ old('password') }}">
+                        <span class="input-group-text" role="button" onclick="togglePassword('password', this)">
+                            <i class="bi bi-eye"></i>
+                        </span>
+                    </div> 
+                </div>
+
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Confirmar Senha</label>
+                    <div class="input-group mb3">
+                        <input type="password" name="confirm_password" class="form-control" id="confirm_password"
+                            placeholder="Confirmar senha" value="{{ old('confirm_password') }}">
+                    </div>
                 </div>
 
                 <div class="col-12">
