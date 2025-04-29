@@ -24,7 +24,7 @@
           </ul>
 
           <div class="col-md-3 text-end">
-            {{-- <button type="button" class="btn btn-outline-primary me-2">Login</button> --}}
+            <a href="{{ route('login.logout') }}" class="btn btn-outline-primary me-2">Sair</a>
             {{-- <button type="button" class="btn btn-primary">Cadastrar</button> --}}
           </div>
         </header>

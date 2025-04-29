@@ -18,7 +18,7 @@
           </a>
 
           <div class="col-md-3 text-end">
-            <a href="{{ route('home.index') }}" class="btn btn-outline-primary me-2">Login</a>
+            <a href="{{ route('login.index') }}" class="btn btn-outline-primary me-2">Login</a>
             {{-- <button type="button" class="btn btn-outline-primary me-2">Login</button> --}}
             {{-- <button type="button" class="btn btn-primary">Cadastrar</button> --}}
           </div>
