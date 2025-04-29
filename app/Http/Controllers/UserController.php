@@ -36,11 +36,24 @@ class UserController extends Controller
         try {
 
             // Cadastrar no banco de dados na tabela usuários
-            User::create([
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password,
+                'image' => '',
             ]);
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $requestImage = $request->image;
+                $extension = $requestImage->extension();
+                $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+                $request->image->move(public_path('img/users'), $imageName);
+
+                $user->update([
+                    'image' => $imageName
+                ]);
+            }
            
             // Operação é concluída com êxito
             DB::commit();

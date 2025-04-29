@@ -28,6 +28,8 @@
 
             <x-alert />
 
+            <img src="/img/users/{{ $user->image }}" alt="" width="600px" height="600px">
+
             <dl class="row">
 
                 <dt class="col-sm-3">ID</dt>

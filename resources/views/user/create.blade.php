@@ -21,7 +21,7 @@
 
             <x-alert />
 
-            <form action="{{ route('user.store') }}" method="POST" class="row g-3">
+            <form action="{{ route('user.store') }}" method="POST" class="row g-3" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
@@ -31,10 +31,19 @@
                         value="{{ old('name') }}">
                 </div>
 
+                <div>
+                    <label for="image">Imagem</label>
+                    <input type="file" id="image" name="image" class="from-control-file">
+                </div>
+
                 <div class="col-md-12">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="email" name="email" class="form-control" id="email"
                         placeholder="E-mail do usuário" value="{{ old('email')}}">
+                </div>
+
+                <div>
+
                 </div>
 
                 <div class="col-md-6">
