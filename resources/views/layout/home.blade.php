@@ -23,6 +23,13 @@
             <li><a href="{{ route('user.index') }}" class="nav-link px-2 link-white">Usuários</a></li>
           </ul>
 
+          <span>
+              Usuário: 
+              @if (auth()->check())
+                  {{ auth()->user()->name }}
+              @endif
+          </span>
+
           <div class="col-md-3 text-end">
             <a href="{{ route('login.logout') }}" class="btn btn-outline-primary me-2">Sair</a>
             {{-- <button type="button" class="btn btn-primary">Cadastrar</button> --}}

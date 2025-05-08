@@ -23,7 +23,7 @@
 
             <x-alert />
 
-            <form action="{{ route('user.update', ['user' => $user->id]) }}" method="POST" class="row g-3">
+            <form action="{{ route('user.update', ['user' => $user->id]) }}" method="POST" class="row g-3" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -39,6 +39,11 @@
                         placeholder="E-mail do usuário" value="{{ old('email', $user->email) }}">
                 </div>
 
+                <div class="col-md-12">
+                    <label for="image">Imagem:</label>
+                    <input type="file" id="image" name="image" class="from-control-file" style="display: block">
+                </div>
+
                 <div class="col-md-6">
                     <label for="password" class="form-label">Senha</label>
                     <div class="input-group mb3">
@@ -47,6 +52,14 @@
                         <span class="input-group-text" role="button" onclick="togglePassword('password', this)">
                             <i class="bi bi-eye"></i>
                         </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Confirmar Senha</label>
+                    <div class="input-group mb3">
+                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation"
+                            placeholder="Confirmar senha" value="{{ old('password_confirmation') }}">
                     </div>
                 </div>
 

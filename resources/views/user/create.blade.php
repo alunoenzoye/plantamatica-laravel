@@ -31,9 +31,9 @@
                         value="{{ old('name') }}">
                 </div>
 
-                <div>
-                    <label for="image">Imagem</label>
-                    <input type="file" id="image" name="image" class="from-control-file">
+                <div class="col-md-12">
+                    <label for="image">Imagem:</label>
+                    <input type="file" id="image" name="image" class="from-control-file" style="display: block">
                 </div>
 
                 <div class="col-md-12">
