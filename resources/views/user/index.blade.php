@@ -11,8 +11,10 @@
         <div class="card-header hstack gap-2">
             <span class="user-select-none">Listar Usuários</span>
 
+
             <span class="ms-auto">
-                <a draggable="false" href="{{ route('user.create') }}" class="btn btn-success btn-sm">Cadastrar</a>
+                <a href="{{ route('user.generate-pdf') }}" class="btn btn-warning btn-sm">Gerar PDF</a>
+                <a draggable="false" href="{{ route('user.create') }}" class="btn btn-success btn-sm"><i></i>Cadastrar</a>
             </span>
         </div>
 
@@ -39,6 +41,9 @@
                         <div class="col-md-4 col-sm-12 mt-4 pt-3">
                             <button type="submit" class="btn btn-info btn-sm">Pesquisar</button>
                             <a href="{{ route('user.index') }}" class="btn btn-warning btn-sm">Limpar</a>
+                            <a href="{{ url('generate-pdf-user?') . request()->getQueryString() }}" class="btn btn-danger btn-sm">
+                                <i class="fa-regular fa-file-pdf"></i>Gerar PDF
+                            </a>
                         </div>
                     </div>
                 </form>

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
@@ -29,6 +30,56 @@ class UserController extends Controller
             'email' => $request->email
         ]);
     }
+
+    // public function generate_pdf() {
+    //     $users = User::when($request->has('name'), function ($whenQuery) use ($request) {
+    //         $whenQuery->where('name', 'like', '%' . $request->name . '%');
+    //     })->when($request->has('email'), function ($whenQuery) use ($request) {
+    //         $whenQuery->where('email', 'like', '%' . $request->email . '%');
+    //     })
+    //     ->orderBy('id')
+    //     ->paginate(10)
+    //     ->withQueryString();
+
+    //     $pdf = PDF::loadView('user.generate-pdf', ['users' => $users])->setPaper('a4', 'portrait');
+
+    //     return $pdf->download('list_users.pdf');
+    // }
+
+    public function generate_pdf(Request $request) {
+        $users = User::when($request->has('name'), function ($whenQuery) use ($request) {
+            $whenQuery->where('name', 'like', '%' . $request->name . '%');
+        })->when($request->has('email'), function ($whenQuery) use ($request) {
+            $whenQuery->where('email', 'like', '%' . $request->email . '%');
+        })->when($request->filled('start_date_registration'), function ($whenQuery) use ($request) {
+            $whenQuery->where('created_at', '>=', \Carbon\Carbon::parse($request->start_date_registration)->format('Y-m-d H:i:s'));
+        })->when($request->filled('end_date-registration'), function ($whenQuery) use ($request) {
+            $whenQuery->where('created_at', '<=', \Carbon\Carbon::parse($request->end_date_registration)->format('Y-m-d H:i:s'));
+        })
+        ->orderBy('created_at')
+        ->get();
+
+        $totalRecords = $users->count('id');
+        $numberRecordsAllowed = 500;
+
+        if ($totalRecords > $numberRecordsAllowed) {
+            return redirect()->route('user.index', [
+                'name' => $request->name,
+                'email' => $request->email,
+                'start_date_registration' => $request->start_date_registration,
+                'start_date_registration' => $request->end_date_registration,
+            ])->with('error', "Limite de registros ultrapassado para gerar PDF. O limite é de $numberRecordsAllowed registros!");
+        }
+
+        $pdf = PDF::loadView('user.generate-pdf', ['users' => $users])->setPaper('a4', 'portrait');
+
+        return $pdf->download('list_users.pdf');
+    }
+
+    // public function pdfTeste() {
+    //     $users = User::orderBy('id')->get();
+    //     return view('user.generate-pdf', ['users' => $users]);
+    // }
     
     public function create() {
         return view("user.create");
