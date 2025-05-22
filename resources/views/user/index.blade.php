@@ -13,8 +13,12 @@
 
 
             <span class="ms-auto">
+                @can('generate-pdf-user')
                 <a href="{{ route('user.generate-pdf') }}" class="btn btn-warning btn-sm">Gerar PDF</a>
+                @endcan
+                @can('create-user')
                 <a draggable="false" href="{{ route('user.create') }}" class="btn btn-success btn-sm"><i></i>Cadastrar</a>
+                @endcan
             </span>
         </div>
 
@@ -71,10 +75,15 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td class="text-center user-select-none">
+                                @can('show-user')
                                 <a href="{{ route('user.show', ['user' => $user->id]) }}" class="btn btn-primary btn-sm"
                                     draggable="false">Visualizar</a>
+                                @endcan
+                                @can('edit-user')
                                 <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm"
                                     draggable="false">Editar</a>
+                                @endcan
+                                @can('destroy-user')
                                 <form id="delete-form-{{ $user->id }}" method="POST"
                                     action="{{ route('user.destroy', ['user' => $user->id]) }}" class="d-inline">
                                     @csrf
@@ -82,6 +91,7 @@
                                     <button type="button" class="btn btn-danger btn-sm"
                                         onclick="confirmDelete({{ $user->id }})">Apagar</button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                     @empty

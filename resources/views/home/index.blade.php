@@ -16,7 +16,9 @@
 
     <div class="card-body">
         <div class="d-flex col-4 text-center">
+            @can('user')
             <a draggable="false" href="{{ route('user.index') }}" class="btn btn-primary btn">Usuários</a>
+            @endcan
         </div>
     </div>
 </div>

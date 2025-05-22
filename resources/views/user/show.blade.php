@@ -13,14 +13,17 @@
             <span>Visualizar Usuário</span>
 
             <span class="ms-auto d-sm-flex flex-row">
-
+                @can('edit-user')
                 <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-warning btn-sm me-1">Editar</a>
+                @endcan
+                @can('destroy-user')
                 <form method="POST" action="{{ route('user.destroy', ['user' => $user->id]) }}">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger btn-sm me-1"
                         onclick="return confirm('Tem certeza que deseja apagar este registro?')">Apagar</button>
                 </form>
+                @endcan
             </span>
         </div>
 

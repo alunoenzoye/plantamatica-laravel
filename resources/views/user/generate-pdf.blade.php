@@ -76,7 +76,7 @@
 
     <h2>Lista de usuários cadastrados</h2>
 
-    <p>Este documento representa a lista de todos os usuários cadastrados no sistema da Plantamática que estão ativos.</p>
+    <p>Este documento representa a lista de todos os usários cadastrados no sistema da Plantamática que estão ativos.</p>
 
     <div class="data">
         <p>Emitido em: 

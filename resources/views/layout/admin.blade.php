@@ -20,7 +20,9 @@
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             {{-- <li><a href="{{ route('index') }}" class="nav-link px-2 link-white">Início</a></li> --}}
             <li><a href="{{ route('home.index') }}" class="nav-link px-2 link-white">Painel</a></li>
+            @can('user')
             <li><a href="{{ route('user.index') }}" class="nav-link px-2 link-secondary">Usuários</a></li>
+            @endcan
           </ul>
 
           <span>

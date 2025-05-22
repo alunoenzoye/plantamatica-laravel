@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserRequest;
+use Spatie\Permission\Models\Permission;
 
 class LoginController extends Controller
 {
@@ -27,6 +28,14 @@ class LoginController extends Controller
 
         $user = Auth::user();
         $user = User::find($user->id);
+
+        if($user->hasRole('Admin')) {
+            $permissions = Permission::pluck('name')->toArray();
+        } else {
+            $permissions = $user->getPermissionsViaRoles()->pluck('name')->toArray();
+        }
+
+        $user->syncPermissions($permissions);
 
         return redirect()->route('home.index');
     }

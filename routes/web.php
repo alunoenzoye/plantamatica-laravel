@@ -25,11 +25,11 @@ Route::group(['middleware' => 'auth'], function() {
 
     // Rotas da página de administração do usuário
     Route::get('/generate-pdf-user', [UserController::class, 'generate_pdf'])->name('user.generate-pdf');
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('/create-user', [UserController::class, 'create'])->name('user.create');
-    Route::get('/show-user/{user}', [UserController::class, 'show_user'])->name('user.show');
-    Route::get('edit-user/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/user', [UserController::class, 'index'])->name('user.index')->middleware('permission:user');
+    Route::get('/create-user', [UserController::class, 'create'])->name('user.create')->middleware('permission:create-user');
+    Route::get('/show-user/{user}', [UserController::class, 'show_user'])->name('user.show')->middleware('permission:show-user');
+    Route::get('edit-user/{user}', [UserController::class, 'edit'])->name('user.edit')->middleware('permission:edit-user');
     Route::post('/store-user', [UserController::class, 'store'])->name('user.store');
     Route::put('update-user/{user}', [UserController::class, 'update'])->name('user.update');
-    Route::delete('destroy-user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+    Route::delete('destroy-user/{user}', [UserController::class, 'destroy'])->name('user.destroy')->middleware('permission:destroy-user');
 });
