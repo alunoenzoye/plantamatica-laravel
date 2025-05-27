@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -82,13 +83,14 @@ class UserController extends Controller
     // }
     
     public function create() {
-        return view("user.create");
+        $roles = Role::pluck('name')->all();
+
+        return view("user.create", ['menu' => 'users', 'roles' => $roles]);
     }
 
     public function show_user(User $user) {
         return view("user.show" , ['user' => $user]);
     }
-
     public function store(UserRequest $request) {
         // Validar o formulário
         $request->validated();
@@ -109,12 +111,16 @@ class UserController extends Controller
             }
 
             // Cadastrar no banco de dados na tabela usuários
-            User::create([
+            $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password,
                 'image' => $imagePath,
             ]);
+
+            if ($request->filled('roles')) {
+                $user->assignRole($request->roles);
+            }
            
             // Operação é concluída com êxito
             DB::commit();
@@ -135,7 +141,16 @@ class UserController extends Controller
     }
 
     public function edit(User $user) {
-        return view('user.edit', ['user' => $user]);
+        $roles = Role::pluck('name')->all();
+
+        $userRoles = $user->roles->pluck('name')->first();
+
+        return view('user.edit', [
+            'menu' => 'users', 
+            'user' => $user, 
+            'roles' => $roles,
+            'userRoles' => $userRoles
+        ]);
     }
 
     public function update(UserRequest $request, User $user) {
@@ -158,6 +173,10 @@ class UserController extends Controller
             'password' => $request->password,
             'image' => $imagePath,
         ]);
+
+        if ($request->filled('roles')) {
+            $user->syncRoles([$request->roles]);
+        }
 
         return redirect()->route('user.show', ['user' => $user]);
     }

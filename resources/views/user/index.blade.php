@@ -64,6 +64,7 @@
                         <th scope="col" class="user-select-none">ID</th>
                         <th scope="col" class="user-select-none">Nome</th>
                         <th scope="col" class="user-select-none">E-mail</th>
+                        <th scope="col" class="user-select-none">Perfil</th>
                         <th scope="col" class="text-center user-select-none">Ações</th>
                     </tr>
                 </thead>
@@ -71,9 +72,14 @@
 
                     @forelse ($users as $user)
                         <tr>
-                            <th>{{ $user->id }}</th>
+                            <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>
+                                @foreach ($user->getRoleNames() as $role)
+                                    <span>{{ $role }}</span>
+                                @endforeach
+                            </td>
                             <td class="text-center user-select-none">
                                 @can('show-user')
                                 <a href="{{ route('user.show', ['user' => $user->id]) }}" class="btn btn-primary btn-sm"

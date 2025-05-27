@@ -38,6 +38,26 @@
                 </div>
 
                 <div class="col-md-6">
+                    <label for="roles" class="form-label">Perfil: </label>
+                    <select name="roles" class="form-select" id="roles">
+                        <option value="">Selecionar</option>
+                        @foreach ($roles as $role)
+                            @if ($role != "Admin") {
+                                <option value="{{ $role }}" {{old('roles') === $role ? 'selected' : ''}}>
+                                    {{ $role }}
+                                </option>
+                            @else
+                                @if (Auth::user()->hasRole('Admin'))
+                                    <option value="{{ $role }}" {{old('roles') === $role ? 'selected' : ''}}>
+                                        {{ $role }}
+                                    </option>
+                                @endif
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-6">
                     <label for="email" class="form-label">E-mail</label>
                     <input type="email" name="email" class="form-control" id="email"
                         placeholder="E-mail do usuário" value="{{ old('email', $user->email) }}">

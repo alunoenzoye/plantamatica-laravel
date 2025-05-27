@@ -43,6 +43,12 @@
 
                 <dt class="col-sm-3">E-mail</dt>
                 <dd class="col-sm-9">{{ $user->email }}</dd>
+                <dt class="col-sm-3">Perfil</dt>
+                <dd class="col-sm-9">
+                    @foreach ($user->getRoleNames() as $role)
+                        <span>{{ $role }}</span>
+                    @endforeach
+                </dd>
 
                 <dt class="col-sm-3">Cadastrado</dt>
                 <dd class="col-sm-9">{{ \Carbon\Carbon::parse($user->created_at)->format('d/m/Y H:i:s') }}</dd>
