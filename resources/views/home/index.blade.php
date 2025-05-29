@@ -19,6 +19,9 @@
             @can('user')
             <a draggable="false" href="{{ route('user.index') }}" class="btn btn-primary btn">Usuários</a>
             @endcan
+            @can('role')
+            <a draggable="false" href="{{ route('role.index') }}" class="btn btn-primary btn">Perfil</a>
+            @endcan
         </div>
     </div>
 </div>

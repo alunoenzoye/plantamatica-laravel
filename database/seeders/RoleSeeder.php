@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -24,6 +25,10 @@ class RoleSeeder extends Seeder
                 'show-user',
                 'edit-user',
                 'destroy-user',
+                'role',
+                'create-role',
+                'edit-role',
+                'destroy-role',
             ]);
         }
 

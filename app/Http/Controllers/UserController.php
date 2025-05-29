@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,21 +32,6 @@ class UserController extends Controller
             'email' => $request->email
         ]);
     }
-
-    // public function generate_pdf() {
-    //     $users = User::when($request->has('name'), function ($whenQuery) use ($request) {
-    //         $whenQuery->where('name', 'like', '%' . $request->name . '%');
-    //     })->when($request->has('email'), function ($whenQuery) use ($request) {
-    //         $whenQuery->where('email', 'like', '%' . $request->email . '%');
-    //     })
-    //     ->orderBy('id')
-    //     ->paginate(10)
-    //     ->withQueryString();
-
-    //     $pdf = PDF::loadView('user.generate-pdf', ['users' => $users])->setPaper('a4', 'portrait');
-
-    //     return $pdf->download('list_users.pdf');
-    // }
 
     public function generate_pdf(Request $request) {
         $users = User::when($request->has('name'), function ($whenQuery) use ($request) {
